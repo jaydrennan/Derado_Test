@@ -1,0 +1,147 @@
+body {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.navbar {
+    background-color: #16213e !important;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.card {
+    background-color: #16213e !important;
+    border-color: #0f3460 !important;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card-title {
+    color: #e94560;
+    font-weight: 700;
+}
+
+.card-subtitle {
+    color: #a0a0b0 !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.nav-tabs {
+    border-bottom-color: #0f3460;
+}
+
+.nav-tabs .nav-link {
+    color: #a0a0b0;
+    border: none;
+    padding: 0.75rem 1.25rem;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #e0e0e0;
+    border-color: transparent;
+}
+
+.nav-tabs .nav-link.active {
+    color: #e94560;
+    background-color: transparent;
+    border-bottom: 2px solid #e94560;
+}
+
+.table-dark {
+    --bs-table-bg: #16213e;
+    --bs-table-striped-bg: #1a2744;
+    --bs-table-hover-bg: #1e2d4f;
+    --bs-table-border-color: #0f3460;
+}
+
+.table th {
+    color: #a0a0b0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    border-bottom-width: 2px;
+    white-space: nowrap;
+}
+
+.table td {
+    white-space: nowrap;
+}
+
+.badge-ready,
+.badge-running {
+    background-color: #00b894;
+    color: #fff;
+}
+
+.badge-notready,
+.badge-pending,
+.badge-waiting {
+    background-color: #fdcb6e;
+    color: #2d3436;
+}
+
+.badge-failed,
+.badge-terminated,
+.badge-error {
+    background-color: #e17055;
+    color: #fff;
+}
+
+.badge-warning {
+    background-color: #fdcb6e !important;
+    color: #2d3436 !important;
+}
+
+.badge-normal {
+    background-color: #74b9ff;
+    color: #2d3436;
+}
+
+.form-control:focus {
+    border-color: #e94560;
+    box-shadow: 0 0 0 0.2rem rgba(233, 69, 96, 0.25);
+}
+
+.progress {
+    background-color: #0f3460;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    background-color: #e94560;
+    border-radius: 4px;
+}
+
+.progress-bar.bg-success {
+    background-color: #00b894 !important;
+}
+
+.progress-bar.bg-warning {
+    background-color: #fdcb6e !important;
+}
+
+.progress-bar.bg-danger {
+    background-color: #e17055 !important;
+}
+
+#last-updated {
+    font-size: 0.8rem;
+    color: #a0a0b0;
+}
+
+.section-heading {
+    color: #e0e0e0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}

@@ -1,0 +1,59 @@
+# Maven build artifacts
+target/
+*.jar
+*.war
+*.ear
+
+# Compiled Java classes
+*.class
+
+# Maven wrapper cache
+.m2/
+.maven/
+
+# IDE and Editor
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+bin/
+.metadata
+
+# OS files
+.DS_Store
+Thumbs.db
+._*
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+.*.sw?
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Spring Boot local overrides
+application-local.yaml
+application-local.properties
+
+# Kubernetes kubeconfig
+kubeconfig
+kubeconfig.*
+
+# Claude
+.claude/
+
+# Misc
+*.orig
+*.rej
