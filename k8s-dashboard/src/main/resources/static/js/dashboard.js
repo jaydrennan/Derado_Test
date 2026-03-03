@@ -201,6 +201,54 @@ function renderPodMetrics(podMetrics) {
     }).join('');
 }
 
+function calicoStatusBadge(reachable) {
+    if (reachable) {
+        return '<span class="badge badge-ready">Reachable</span>';
+    }
+    return '<span class="badge badge-failed">Unreachable</span>';
+}
+
+function calicoErrorBadge(errorCount) {
+    if (errorCount === null || errorCount === undefined) {
+        return '-';
+    }
+    if (errorCount > 0) {
+        return `<span class="badge badge-warning">${errorCount}</span>`;
+    }
+    return `<span class="badge badge-normal">${errorCount}</span>`;
+}
+
+async function loadCalicoMetrics() {
+    try {
+        const calicoMetrics = await fetchJSON('/api/v1/network/calico');
+        const unavail = document.getElementById('calico-unavailable');
+        const tbody = document.getElementById('calico-table');
+
+        if (calicoMetrics.length === 0) {
+            unavail.classList.remove('d-none');
+            tbody.innerHTML = '';
+            return;
+        }
+
+        unavail.classList.add('d-none');
+        tbody.innerHTML = calicoMetrics.map(m => `
+            <tr>
+                <td>${m.nodeName || '-'}</td>
+                <td>${m.calicoNodePodName || '-'}</td>
+                <td>${m.podIp || '-'}</td>
+                <td>
+                    ${calicoStatusBadge(m.reachable)}
+                    ${m.errorMessage ? `<small class="text-muted d-block mt-1">${m.errorMessage}</small>` : ''}
+                </td>
+                <td>${m.activeLocalEndpoints ?? '-'}</td>
+                <td>${calicoErrorBadge(m.iptablesSaveErrorsTotal)}</td>
+            </tr>
+        `).join('');
+    } catch (e) {
+        console.error('Failed to load calico metrics:', e);
+    }
+}
+
 function updateTimestamp() {
     document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
 }
@@ -222,7 +270,8 @@ async function refreshAll() {
         loadDeployments(),
         loadEvents(),
         loadMetrics(),
-        loadPodMetrics()
+        loadPodMetrics(),
+        loadCalicoMetrics()
     ]);
     updateTimestamp();
 }

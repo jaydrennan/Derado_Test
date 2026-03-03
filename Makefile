@@ -4,7 +4,7 @@ APP_NAME := k8s-dashboard
 DOCKER_IMAGE := $(APP_NAME):latest
 NAMESPACE := k8s-dashboard
 
-.PHONY: cluster-up cluster-down build test docker-build kind-load deploy undeploy status logs all clean
+.PHONY: cluster-up cluster-down build test docker-build kind-load deploy undeploy status logs install-metrics-server install-calico all clean
 
 # --- Cluster Management ---
 cluster-up:
@@ -59,6 +59,10 @@ install-metrics-server:
 	kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 	kubectl patch deployment metrics-server -n kube-system --type='json' \
 		-p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--kubelet-insecure-tls"}, {"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--kubelet-preferred-address-types=InternalIP"}]'
+
+# --- Calico CNI (optional, for network/Felix metrics) ---
+install-calico:
+	kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/calico.yaml
 
 # --- Full Pipeline ---
 all: cluster-up install-metrics-server docker-build kind-load deploy status

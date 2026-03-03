@@ -1,6 +1,6 @@
 # Kubernetes Monitoring Dashboard
 
-A full-stack Java Spring Boot dashboard that monitors a Kubernetes cluster - nodes, pods, deployments, events, and resource usage - with a REST API and a dark-themed web UI.
+A full-stack Java Spring Boot dashboard that monitors a Kubernetes cluster - nodes, pods, deployments, events, resource usage, and Calico Felix networking health - with a REST API and a dark-themed web UI.
 
 ## Tech Stack
 
@@ -43,6 +43,8 @@ Then open: **http://localhost:30080**
 | GET | `/api/v1/deployments?namespace=` | All deployments |
 | GET | `/api/v1/events?namespace=&limit=` | Recent events (default 50) |
 | GET | `/api/v1/metrics/nodes` | Node resource usage |
+| GET | `/api/v1/metrics/pods?namespace=` | Pod resource usage |
+| GET | `/api/v1/network/calico` | Calico Felix metrics per node |
 | GET | `/` | Web dashboard |
 
 ## Makefile Targets
@@ -60,6 +62,7 @@ Then open: **http://localhost:30080**
 | `make status` | Show cluster and pod status |
 | `make logs` | Stream dashboard logs |
 | `make install-metrics-server` | Install metrics-server |
+| `make install-calico` | Install Calico CNI manifest |
 | `make all` | Full pipeline (cluster + build + deploy) |
 | `make clean` | Undeploy and delete cluster |
 
