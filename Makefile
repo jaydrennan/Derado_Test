@@ -63,6 +63,10 @@ install-metrics-server:
 # --- Calico CNI (optional, for network/Felix metrics) ---
 install-calico:
 	kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/calico.yaml
+	@echo "Waiting for calico-node pods to be ready..."
+	kubectl rollout status daemonset/calico-node -n kube-system --timeout=120s
+	kubectl patch felixconfiguration default --type merge -p '{"spec":{"prometheusMetricsEnabled": true}}'
+	@echo "Calico installed with Felix Prometheus metrics enabled on :9091"
 
 # --- Full Pipeline ---
 all: cluster-up install-metrics-server docker-build kind-load deploy status
