@@ -69,7 +69,7 @@ install-calico:
 	@echo "Calico installed with Felix Prometheus metrics enabled on :9091"
 
 # --- Full Pipeline ---
-all: cluster-up install-metrics-server docker-build kind-load deploy status
+all: cluster-up install-metrics-server install-calico docker-build kind-load deploy status
 	@echo ""
 	@echo "Dashboard available at: http://localhost:30080"
 
