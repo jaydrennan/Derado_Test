@@ -15,3 +15,7 @@ management:
   endpoint:
     health:
       show-details: always
+
+calico:
+  metrics:
+    poll-interval-ms: 30000

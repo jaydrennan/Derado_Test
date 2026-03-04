@@ -61,6 +61,20 @@ A full-stack Java Spring Boot dashboard for monitoring Kubernetes clusters, depl
 - [x] New tests: `PodResourceUsageTest`, `MetricsApiControllerTest`
 - [x] Updated tests: `PodServiceTest`, `PodApiControllerTest`, `NodeServiceTest`, `NodeApiControllerTest`
 
+### Phase 9: Calico Network Metrics
+- [x] `CalicoNodeMetrics` DTO for Felix node health fields
+- [x] `RestTemplateConfig` with short connect/read timeouts for Calico scraping
+- [x] `CalicoMetricsService`:
+  - discovers `kube-system` pods labeled `k8s-app=calico-node`
+  - fetches `http://<pod-ip>:9091/metrics`
+  - parses `felix_active_local_endpoints` and `felix_iptables_save_errors_total`
+  - scheduled polling warns on endpoint unreachability transitions and iptables error counter increases
+- [x] `CalicoApiController` with `GET /api/v1/network/calico`
+- [x] `@EnableScheduling` added to app entrypoint, `calico.metrics.poll-interval-ms` config added
+- [x] Dashboard "Network" tab with Calico Felix table and empty-state messaging
+- [x] New tests: `CalicoMetricsServiceTest`, `CalicoApiControllerTest`
+- [x] `Makefile` target: `install-calico`
+
 ## REST API
 
 | Method | Path | Description |
@@ -72,6 +86,7 @@ A full-stack Java Spring Boot dashboard for monitoring Kubernetes clusters, depl
 | GET | `/api/v1/events?namespace=&limit=` | Recent events |
 | GET | `/api/v1/metrics/nodes` | Node resource usage |
 | GET | `/api/v1/metrics/pods?namespace=` | Pod resource usage |
+| GET | `/api/v1/network/calico` | Calico Felix metrics per node |
 | GET | `/` | Web dashboard |
 
 ## Verification Steps

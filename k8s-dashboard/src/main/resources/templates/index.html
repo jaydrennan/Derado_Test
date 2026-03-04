@@ -69,6 +69,9 @@
             <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#metrics-tab" type="button">Metrics</button>
             </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#network-tab" type="button">Network</button>
+            </li>
         </ul>
 
         <div class="tab-content mt-3">
@@ -198,6 +201,29 @@
                             </tr>
                         </thead>
                         <tbody id="pod-metrics-table"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Network Tab -->
+            <div class="tab-pane fade" id="network-tab">
+                <div id="calico-unavailable" class="alert alert-info d-none">
+                    Calico CNI was not detected in kube-system.
+                </div>
+                <h5 class="section-heading mb-3">Calico Felix Health</h5>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Node</th>
+                                <th>Calico Pod</th>
+                                <th>Pod IP</th>
+                                <th>Status</th>
+                                <th>Active Endpoints</th>
+                                <th>IPTables Save Errors</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calico-table"></tbody>
                     </table>
                 </div>
             </div>
